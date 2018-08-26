@@ -1,7 +1,7 @@
 Package.describe({
   name: "msavin:usercache",
-  summary: "The one simple trick that can save you millions of database request",
-  version: '0.1.0',
+  summary: "The one simple trick that can save you millions of database requests!",
+  version: '1.0.0',
   git: "https://github.com/msavin/userCache.git",
   documentation: "README.md",
 });
