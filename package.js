@@ -8,6 +8,7 @@ Package.describe({
 
 Package.onUse(function(api) {
 	api.addFiles("server.js", "server");
+	api.versionsFrom("1.5");
 
 	api.use([
 		'ddp',
