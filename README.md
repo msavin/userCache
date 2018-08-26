@@ -29,6 +29,8 @@ Meteor.user("profile.name")	 	   // verifies if the fields are in MergeBox. If n
 Meteor.user(['profile.name', 'email'])     // verifies if the fields are in MergeBox. If not, it retrieves the document from the database
 ```
 
+`Meteor.user()` will continue to return the user document as usual. If can satisfy your field requirements, it will do so from MergeBox. If it cannot, it will retrieve the data from the database as usual.
+
 ## Example
 
 In the example below, we are using `Meteor.user()` for a roles check to ensure that the user is not banned. Typically, this would require us to ping the database. However, with the userCache package, we can bypass that entire query, and all the processing that comes with it. By doing so, we improve performance and speed up response time.  
