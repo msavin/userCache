@@ -9,7 +9,7 @@ Meteor.userCache = function () {
 	var connectionData = Meteor.default_server.sessions[connectionId];
 	var collectionViews = connectionData.collectionViews.users.documents[instance.userId];
 	var data = collectionViews && collectionViews.dataByKey || [];
-	var result = null;
+	var result = undefined;
 
 	Object.keys(data).forEach(function (item) {
 		if (!result) {
