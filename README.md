@@ -1,15 +1,15 @@
 # Meteor.userCache 
 
 Meteor.userCache builds upon three simple premises:
-1. Every time you run Meteor.user() on the server, it has to call the database to retrieve the user document.
-2. Every time a user account connects to your server, Meteor automatically subscribes for their user document.
-3. Every time a subscription is started, the documents of subscription are cached on the server.
+1. Every time you run Meteor.user() on the server, it has to call the database to retrieve the user document
+2. Every time a user account connects to your server, Meteor automatically subscribes for to their user document
+3. Whenever a subscription is running, the documents that are part of that subscription are cached to the server
 
-Instead of querying the database every time that `Meteor.user()` is executed, we should first see if it's sufficient to retrieve it from the server-side cache (MergeBox). Since the server-side cache is updated in real-time, the risk of stale data may be insignificant.
+Thus, instead of querying the database every time that `Meteor.user()` is ran, we could first see if it's sufficient to retrieve it from the server-side cache (also known as MergeBox). Since MergeBox is fast and real-time (in fact, it gets the data before the client), the risk of stale data may be insignificant.
 
-The result is: 
+The benefit of using `Meteor.userCache()` over `Meteor.user()` is 
  - fewer database queries
- - better performance
+ - greater performance
  - faster response time
 
 ## How to Use
@@ -20,7 +20,7 @@ First, add to the package to your application:
 meteor add msavin:usercache
 ```
 
-Second, use `Meteor.userCache()` as you would use `Meteor.user()` inside of a Method or Publication
+Second, use `Meteor.userCache()` as you would use `Meteor.user()`:
 
 ```js
 Meteor.methods({
@@ -29,7 +29,7 @@ Meteor.methods({
 
 		if (!userDoc.profile.roles.includes("banned")) {
 			Posts.insert({
-				user: userDoc._id,
+				user: Meteor.userId(),
 				date: new Date(),
 				content: content
 			})
