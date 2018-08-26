@@ -16,7 +16,9 @@ The result is:
 
 First, add to the package to your application:
 
-```meteor add msavin:usercache```
+```bash
+meteor add msavin:usercache
+```
 
 Second, use `Meteor.userCache()` as you would use `Meteor.user()` inside of a Method or Publication
 
