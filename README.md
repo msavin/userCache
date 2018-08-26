@@ -45,4 +45,6 @@ In the example above, instead of querying the database for the user document eve
  
 Not only would this reduce a significant amount of database queries, but it also speeds up how quickly messages are inserted into the database and sent out to the other users.
 
+## Status
+
 This package works fine, but is currently out as a proof of concept. 
