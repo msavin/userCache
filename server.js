@@ -8,16 +8,15 @@ Meteor.userCache = function () {
 	var connectionId = instance.connection.id;
 	var connectionData = Meteor.default_server.sessions[connectionId];
 	var collectionViews = connectionData.collectionViews.users.documents[instance.userId];
-	var data = collectionViews.dataByKey || [];
-	var result = false;
+	var data = collectionViews && collectionViews.dataByKey || [];
+	var result = null;
 
 	Object.keys(data).forEach(function (item) {
-		// does anyone else feel like this is risky in JS haha (I'm looking at you null!)
-		if (typeof result !== "object") {
-			result = {}
+		if (!result) {
+			result = {};
 		}
 
-		result[item] = data[item][0].value
+		result[item] = data[item][0].value;
 	});
 
 	return result;
