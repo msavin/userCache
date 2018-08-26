@@ -25,7 +25,7 @@ Once you add the package, Meteor.user() will be enhanced with new properties.
 ```javascript
 Meteor.user()                              // works as usual
 Meteor.user(true)                          // gets data from mergebox
-Meteor.user("profile.name")				   // verifies if the fields are in MergeBox. If not, it retrieves the document from the database
+Meteor.user("profile.name")	 	   // verifies if the fields are in MergeBox. If not, it retrieves the document from the database
 Meteor.user(['profile.name', 'email'])     // verifies if the fields are in MergeBox. If not, it retrieves the document from the database
 ```
 
