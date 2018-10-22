@@ -57,7 +57,7 @@ Meteor.user = function (input) {
 		var innocent = true;
 
 		input.forEach(function (item) {
-			if (typeof _getField(cache, item) === "undefined") {
+			if (!_getField(cache, item)) {
 				innocent = false;
 			}
 		})
