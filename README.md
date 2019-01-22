@@ -10,7 +10,7 @@ Thus, instead of querying the database every time that `Meteor.user()` is ran, w
 The benefit of using userCache are:
  - fewer database queries and the associated overhead
  - faster performance and response time
- - complete backwards compatiblity
+ - complete backwards compatibility
 
 ## How to Use
 
