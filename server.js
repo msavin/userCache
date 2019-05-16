@@ -13,25 +13,15 @@ var _getCache = function () {
 	var connectionData = isMeteor1_8 ? Meteor.default_server.sessions.get(connectionId) : Meteor.default_server.sessions[connectionId];
 	var collectionViews = isMeteor1_8 ? connectionData.collectionViews.get('users').documents.get(instance.userId) : connectionData.collectionViews.users.documents[instance.userId];
 	var data = collectionViews && collectionViews.dataByKey || [];
+	var source = isMeteor1_8 ? Array.from(data.entries()) : Object.keys(data);
 
-	if (isMeteor1_8) {
-		Array.from(data.entries()).forEach(function (item) {
-		    if (!result) {
-			    result = {};
-		    }
-
-		    result[item[0]] = item[1].value;
-	    });
-	}
-	else {
-		Object.keys(data).forEach(function (item) {
-			if (!result) {
-				result = {};
-			}
-
-			result[item] = data[item][0].value;
-		});
-	}
+	source.forEach(function (item) {
+		if (!result) {
+			result = {};
+		}
+		var key = isMeteor1_8 ? item[0] : item;
+        result[key] = isMeteor1_8 ? item[1].value : data[item][0].value;
+	});
 
 	return result;
 }
