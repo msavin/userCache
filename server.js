@@ -20,7 +20,7 @@ var _getCache = function () {
 			result = {};
 		}
 		var key = isMeteor1_8 ? item[0] : item;
-        result[key] = isMeteor1_8 ? item[1].value : data[item][0].value;
+        result[key] = isMeteor1_8 ? item[1][0].value : data[item][0].value;
 	});
 
 	return result;
