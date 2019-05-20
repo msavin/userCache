@@ -3,23 +3,24 @@ var _original = Meteor.user;
 var _getCache = function () {
 	var result = undefined;
 	var instance = DDP._CurrentMethodInvocation.get() || DDP._CurrentPublicationInvocation.get();
+	var isMeteor1_8 = Meteor.release.match('1.8') !== null;
 
 	if (!instance.userId) {
 		return result;
 	}
 
 	var connectionId = instance.connection.id;
-	var connectionData = Meteor.default_server.sessions[connectionId];
-	var collectionViews = connectionData.collectionViews.users.documents[instance.userId];
+	var connectionData = isMeteor1_8 ? Meteor.default_server.sessions.get(connectionId) : Meteor.default_server.sessions[connectionId];
+	var collectionViews = isMeteor1_8 ? connectionData.collectionViews.get('users').documents.get(instance.userId) : connectionData.collectionViews.users.documents[instance.userId];
 	var data = collectionViews && collectionViews.dataByKey || [];
+	var source = isMeteor1_8 ? Array.from(data.entries()) : Object.keys(data);
 
-
-	Object.keys(data).forEach(function (item) {
+	source.forEach(function (item) {
 		if (!result) {
 			result = {};
 		}
-
-		result[item] = data[item][0].value;
+		var key = isMeteor1_8 ? item[0] : item;
+        result[key] = isMeteor1_8 ? item[1][0].value : data[item][0].value;
 	});
 
 	return result;
@@ -50,7 +51,7 @@ Meteor.user = function (input) {
 
 	if (typeof input === "string") {
 		input = [input];
-	} 
+	}
 
 	if (typeof input === "object") {
 		var cache = _getCache()
